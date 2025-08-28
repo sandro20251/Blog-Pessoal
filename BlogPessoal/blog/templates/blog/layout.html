@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Pessoal</title>
+    <link rel="stylesheet" href="{% static 'blog/estilo.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1>Blog Pessoal</h1>
+    </header>
+    <nav>
+        <a href="#">Login</a>
+        <a href="#">Logout</a>
+        <a href="#">Início</a>
+    </nav>
+    {% block body %}{% endblock %}
+    <script src="{% static 'blog/script.js' %}"></script>
+</body>
+
+</html>
