@@ -1,0 +1,30 @@
+{% extends 'blog/layout.html' %}
+
+{% block body %}
+<h2>Insira uma novca categoria</h2>
+<form action="{% url 'categoria' %}" method="post">
+    {% csrf_token %}
+    <label>Nome da categoria:</label>
+    <input type="text" name="categoriaCategoria">
+    <button type="submit">Adicionar</button>
+</form>
+<hr>
+<h2>Atualize a categoria:</h2>
+<form action="#">
+    {% csrf_token %}
+    <label>Nome da categoria:</label>
+    <input type="text" name="atualizarCategoria">
+    <button type="submit">Atualizar</button>
+</form>
+<hr>
+<h2>Lista de categorias:</h2>
+{% for c in categorias %}
+<p>{{c.nome}}</p>
+<button>Atualziar</button>
+<form action="#">
+    {% csrf_token %}
+    <button type="submit">Remover</button>
+</form>
+{% endfor %}
+<hr>
+{% endblock %}

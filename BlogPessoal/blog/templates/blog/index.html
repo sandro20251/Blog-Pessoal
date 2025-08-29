@@ -4,4 +4,23 @@
 {% if request.user.is_authenticated %}
 <h2>Bem vindo {{user.username}}</h2>
 {% endif %}
+<h2>Insira sua postagem</h2>
+<form action="#">
+    {% csrf_token %}
+    <label>Título:</label><br>
+    <input type="text" name="conteudoPost"><br>
+    <label>categoria:</label><br>
+    <select name="categoriaPost">
+        {% for c in categorias %}
+        <option value="{{c.nome}}">{{c.nome}}</option>
+        {% endfor %}
+    </select>
+    <br>
+
+    <label>conteúdo:</label><br>
+    <textarea name="conteudoPost"></textarea><br>
+    <button type="submit">Postar</button>
+
+</form>
+<hr>
 {% endblock %}

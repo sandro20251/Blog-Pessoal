@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .models import Categoria
 
 
 # Create your views here.
@@ -11,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     if request.user.is_authenticated:
-        
+
         return render(request, 'blog/index.html',)
     return HttpResponseRedirect(reverse('login'))
 
@@ -51,3 +52,14 @@ def registerv(request):
         registro.save()
         return HttpResponseRedirect(reverse('login'))
     return render(request, 'blog/register.html')
+
+
+def categoria(request):
+    if request.method == "POST":
+        nome = request.POST['categoriaCategoria']
+        usuario = request.user
+        categoria = Categoria(nome=nome, usuario=usuario)
+        categoria.save()
+        return HttpResponseRedirect(reverse('categoria'))
+    categorias = Categoria.objects.all()
+    return render(request, 'blog/categoria.html', {"categorias": categorias})

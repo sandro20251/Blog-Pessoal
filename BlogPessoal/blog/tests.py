@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
+from .models import Categoria
 
 # Create your tests here.
 
@@ -14,6 +15,10 @@ class Testes(TestCase):
             username="b", password="b", email="b@gmail.com")
         self.u3 = User.objects.create_user(
             username="c", password="c", email="c@gmail.com")
+
+        self.c1 = Categoria.objects.create(nome="a", usuario=self.u1)
+        self.c2 = Categoria.objects.create(nome="b", usuario=self.u1)
+        self.c13 = Categoria.objects.create(nome="c", usuario=self.u1)
     # Testes de cadstro/usuarios/tela principal
 
     def test_index(self):
@@ -38,3 +43,17 @@ class Testes(TestCase):
         """testando quantidade de usuarios"""
         usuarios = User.objects.all()
         self.assertEqual(usuarios.count(), 3)
+
+    # Teste de rota categoria
+
+    def test_categoria(self):
+        """Testando rota categoria"""
+        c = Client()
+        response = c.get("/categoria/")
+        self.assertEqual(response.status_code, 200)
+
+    # teste de inserção de cateogira
+    def test_categoriaInsert(self):
+        """Testando inserção de categorias"""
+        categorias = Categoria.objects.all()
+        self.assertEqual(categorias.count(), 3)
