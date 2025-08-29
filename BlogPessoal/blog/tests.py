@@ -72,11 +72,21 @@ class Testes(TestCase):
         postagens = Post.objects.all()
         self.assertEqual(postagens.count(), 3)
 
+    # teste de remoção de postagem
+
     def test_removerPostagem(self):
         """removendo uma postagem"""
-
         postagem = Post.objects.get(titulo="e")
         postagem.delete()
         u1 = User.objects.get(username="a")
         postagens = Post.objects.filter(usuario=u1)
         self.assertEqual(postagens.count(), 2)
+
+    # teste alterando postagem
+
+    def test_alterarPostagem(self):
+        """Alterando uma postagem"""
+        postagem = Post.objects.get(titulo="f")
+        postagem.conteudo = "zzz"
+        postagem.save()
+        self.assertEqual(postagem.conteudo, "zzz")

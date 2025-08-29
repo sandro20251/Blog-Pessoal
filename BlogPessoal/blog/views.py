@@ -91,3 +91,19 @@ def remover2(request, id):
     postagem = Post.objects.get(pk=id)
     postagem.delete()
     return HttpResponseRedirect(reverse('index'))
+
+
+def atualizarPostagem(request):
+    if request.method == "POST":
+        id = request.POST['idAtualizarPostagem']
+        titulo = request.POST['tituloPostA']
+        categoria = request.POST['categoriaPostA']
+        categoriaObjeto = Categoria.objects.get(id=categoria)
+        conteudo = request.POST['conteudoPostA']
+
+        postagem = Post.objects.get(pk=id)
+        postagem.titulo = titulo
+        postagem.categoria = categoriaObjeto
+        postagem.conteudo = conteudo
+        postagem.save()
+        return HttpResponseRedirect(reverse('index'))

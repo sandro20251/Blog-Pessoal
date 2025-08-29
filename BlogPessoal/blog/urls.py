@@ -10,4 +10,5 @@ urlpatterns = [
     path('post/', views.post, name="post"),
     path('remover1/<int:id>', views.remover1, name="remover1"),
     path('remover2/<int:id>', views.remover2, name="remover2"),
+    path('atualizarPostagem/>', views.atualizarPostagem, name="atualizarPostagem"),
 ]

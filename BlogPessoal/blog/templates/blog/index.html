@@ -1,39 +1,72 @@
 {% extends 'blog/layout.html' %}
 
 {% block body %}
-{% if request.user.is_authenticated %}
-<h2>Bem vindo {{user.username}}</h2>
-{% endif %}
-<h2>Insira sua postagem</h2>
-<form action="{% url 'post' %}" method="post">
-    {% csrf_token %}
-    <label>Título:</label><br>
-    <input type="text" name="tituloPost"><br>
-    <label>categoria:</label><br>
-    <select name="categoriaPost">
-        {% for c in categorias %}
-        <option value="{{c.id}}" name="categoriaPost">{{c.nome}}</option>
-        {% endfor %}
-    </select>
-    <br>
+<div>
+    {% if request.user.is_authenticated %}
+    <h2>Bem vindo {{user.username}}</h2>
+    {% endif %}
+</div>
+<div>
+    <h2>Insira sua postagem</h2>
+    <form action="{% url 'post' %}" method="post">
+        {% csrf_token %}
+        <label>Título:</label><br>
+        <input type="text" name="tituloPost"><br>
+        <label>categoria:</label><br>
+        <select name="categoriaPost">
+            {% for c in categorias %}
+            <option value="{{c.id}}" name="categoriaPost">{{c.nome}}</option>
+            {% endfor %}
+        </select>
+        <br>
 
-    <label>conteúdo:</label><br>
-    <textarea name="conteudoPost"></textarea><br>
-    <button type="submit">Postar</button>
+        <label>conteúdo:</label><br>
+        <textarea name="conteudoPost"></textarea><br>
+        <button type="submit">Postar</button>
 
-</form>
-<hr>
-<h2>Lista de postagens:</h2>
-<hr>
-{% for p in postagens %}
-<p>{{p.titulo}}</p>
-<p>{{p.usuario}}</p>
-<p>{{p.categoria}}</p>
-<p>{{p.dataPostagem}}</p>
-<p>{{p.conteudo}}</p>
-<form action="{% url 'remover1' p.id %}">
-    <button type="submit" class="btnRemover">remover</button>
-</form>
-<hr>
-{% endfor %}
+    </form>
+    <hr>
+</div>
+<div id="jsAtualizarPostagem" class="hide">
+    <h2>Atualize sua postagem aqui:</h2>
+    <form action="{% url 'atualizarPostagem' %}" method="post">
+        {% csrf_token %}
+        <label>Id:</label><br>
+        <input type="number" name="idAtualizarPostagem" class="jsIdPostagemA" readonly><br>
+        <label>Título:</label><br>
+        <input type="text" name="tituloPostA" class="jsTituloPostagemA"><br>
+        <label>categoria:</label><br>
+        <select name="categoriaPostA" class="jsCategoriaPostagemA">
+            {% for c in categorias %}
+            <option value="{{c.id}}" name="categoriaPostA">{{c.nome}}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label>conteúdo:</label><br>
+        <textarea name="conteudoPostA" class="jsConteudoPostagemA"></textarea><br>
+        <button type="submit">Atualizar</button>
+
+    </form>
+    <hr>
+</div>
+
+<div>
+    <h2>Lista de postagens:</h2>
+    <hr>
+    {% for p in postagens %}
+    <p>{{p.titulo}}</p>
+    <p>{{p.usuario}}</p>
+    <p>{{p.categoria}}</p>
+    <p>{{p.dataPostagem}}</p>
+    <p>{{p.conteudo}}</p>
+    <button class="jsBtnAtualizar" data-id={{p.id}} data-titulo={{p.titulo}} data-categoria={{p.categoria}}
+        data-conteudo={{p.conteudo}}>Editar</button>
+    <form action="{% url 'remover1' p.id %}">
+        <button type="submit" class="btnRemover">remover</button>
+    </form>
+    <hr>
+    {% endfor %}
+</div>
+
 {% endblock %}
