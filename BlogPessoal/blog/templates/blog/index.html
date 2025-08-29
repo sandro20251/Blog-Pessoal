@@ -1,5 +1,7 @@
 {% extends 'blog/layout.html' %}
 
 {% block body %}
-<p>Olá mundo!!</p>
+{% if request.user.is_authenticated %}
+<h2>Bem vindo {{user.username}}</h2>
+{% endif %}
 {% endblock %}

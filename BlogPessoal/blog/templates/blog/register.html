@@ -1,0 +1,19 @@
+{% extends 'blog/layout.html' %}
+
+{% block body %}
+<h2>Registre-se aqui:</h2>
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <label>Usuário:</label><br>
+    <input type="text" name="usernameRegister"><br>
+    <label>Email:</label><br>
+    <input type="email" name="emailRegister"><br>
+    <label>Senha:</label><br>
+    <input type="password" name="passwordRegister"><br>
+    <label>digite de novo a senha:</label><br>
+    <input type="password" name="password2Register"><br>
+    <button type="submit">Registrar</button>
+</form>
+
+
+{% endblock %}

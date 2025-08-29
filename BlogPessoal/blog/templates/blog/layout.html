@@ -14,9 +14,10 @@
         <h1>Blog Pessoal</h1>
     </header>
     <nav>
-        <a href="#">Login</a>
-        <a href="#">Logout</a>
-        <a href="#">Início</a>
+        <a href="{% url 'index' %}">Início</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'register'%}">Cadastre-se</a>
     </nav>
     {% block body %}{% endblock %}
     <script src="{% static 'blog/script.js' %}"></script>
