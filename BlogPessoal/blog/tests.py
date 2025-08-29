@@ -71,3 +71,12 @@ class Testes(TestCase):
         """testando isnerção de postagens"""
         postagens = Post.objects.all()
         self.assertEqual(postagens.count(), 3)
+
+    def test_removerPostagem(self):
+        """removendo uma postagem"""
+
+        postagem = Post.objects.get(titulo="e")
+        postagem.delete()
+        u1 = User.objects.get(username="a")
+        postagens = Post.objects.filter(usuario=u1)
+        self.assertEqual(postagens.count(), 2)

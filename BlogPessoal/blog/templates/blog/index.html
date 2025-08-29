@@ -31,6 +31,9 @@
 <p>{{p.categoria}}</p>
 <p>{{p.dataPostagem}}</p>
 <p>{{p.conteudo}}</p>
+<form action="{% url 'remover1' p.id %}">
+    <button type="submit" class="btnRemover">remover</button>
+</form>
 <hr>
 {% endfor %}
 {% endblock %}

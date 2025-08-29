@@ -80,3 +80,14 @@ def post(request):
                         conteudo=conteudo, usuario=usuario, dataPostagem=dataPostagem)
         postagem.save()
         return HttpResponseRedirect(reverse('index'))
+
+
+def remover1(request, id):
+    postagem = Post.objects.get(pk=id)
+    return render(request, 'blog/confirmarRemoverPostagem.html', {"postagem": postagem})
+
+
+def remover2(request, id):
+    postagem = Post.objects.get(pk=id)
+    postagem.delete()
+    return HttpResponseRedirect(reverse('index'))

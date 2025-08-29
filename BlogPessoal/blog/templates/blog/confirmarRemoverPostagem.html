@@ -1,0 +1,18 @@
+{% extends 'blog/layout.html' %}
+
+{% block body %}
+<h2>tem certeza que deseja remover a postagem abaixo:</h2>
+<p>{{postagem.titulo}}</p>
+<p>{{postagem.usuario}}</p>
+<p>{{postagem.categoria}}</p>
+<p>{{postagem.dataPostagem}}</p>
+<p>{{postagem.conteudo}}</p>
+<form action="{% url 'remover2' postagem.id %}">
+    {%csrf_token %}
+    <button type="submit">Sim</button>
+</form>
+<form action="{% url 'index' %}">
+    <button type=submit>Não</button>
+</form>
+
+{% endblock %}
