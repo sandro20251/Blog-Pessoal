@@ -15,7 +15,15 @@ document.addEventListener('DOMContentLoaded', function () {
             conteudoAtualizar.value = btnAtualizar.dataset.conteudo;
 
         }
+
+        const btnAddComentario = e.target.closest('.jsBtnComentario');
+        if (btnAddComentario) {
+            const comentario = document.querySelector('#jsAddComentario');
+            comentario.classList.toggle('hide');
+        }
+
     })
+
 })
 
 

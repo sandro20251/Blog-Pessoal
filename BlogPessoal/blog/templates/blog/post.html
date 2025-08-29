@@ -1,0 +1,35 @@
+{% extends 'blog/layout.html' %}
+
+{% block body %}
+{{user.username}}
+<div>
+    <h2>{{postagem.titulo}}</h2>
+    <p><strong>Data de postagem:</strong>{{postagem.dataPostagem}}</p>
+    <p><strong>Autor:</strong>{{postagem.usuario}}</p>
+    <p><strong>Categoria:</strong>{{postagem.categoria}}</p>
+    <p><strong>Postagem:</strong>{{postagem.conteudo}}</p>
+
+    <button class="jsBtnComentario">Adicione um comentário</button>
+
+</div>
+<hr>
+<div id="jsAddComentario" class="hide">
+    <h2>Adicione seu comentário:</h2>
+    <form action="{% url 'comentario' postagem.id %}" method="post">
+        {% csrf_token %}
+        <label>Mensagem:</label><br>
+        <textarea name="mensagemComentario"></textarea><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+</div>
+<hr>
+<div>
+    <h2>Comentários da postagem</h2>
+    {% for c in comentarios %}
+    <p><Strong>Autor:</Strong>{{c.usuario}}</p>
+    <p><strong>Comentário:</strong>{{c.mensagem}}</p>
+    {% endfor %}
+</div>
+<hr>
+{% endblock %}

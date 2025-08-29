@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
-from .models import Categoria, Post
+from .models import Categoria, Post, Comentarios
 from django.utils import timezone
 
 # Create your tests here.
@@ -27,6 +27,14 @@ class Testes(TestCase):
         ), usuario=self.u1, conteudo="fffffffffffff")
         self.p3 = Post.objects.create(titulo="g", categoria=self.c1, dataPostagem=timezone.now(
         ), usuario=self.u1, conteudo="ggggggggggggg")
+
+        self.com1 = Comentarios.objects.create(
+            usuario=self.u1, mensagem="mmm", postagem=self.p1)
+        self.com1 = Comentarios.objects.create(
+            usuario=self.u1, mensagem="nnn", postagem=self.p1)
+        self.com1 = Comentarios.objects.create(
+            usuario=self.u1, mensagem="ooo", postagem=self.p1)
+
     # Testes de cadstro/usuarios/tela principal
 
     def test_index(self):
@@ -90,3 +98,10 @@ class Testes(TestCase):
         postagem.conteudo = "zzz"
         postagem.save()
         self.assertEqual(postagem.conteudo, "zzz")
+
+    # testando isnerção de comentários
+
+    def test_coment_inserir(self):
+        """Testando inserção de comentários"""
+        comentarios = Comentarios.objects.all()
+        self.assertEqual(comentarios.count(), 3)

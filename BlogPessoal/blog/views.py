@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Categoria, Post
+from .models import Categoria, Post, Comentarios
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 
@@ -14,9 +14,10 @@ from django.shortcuts import get_object_or_404
 
 def index(request):
     if request.user.is_authenticated:
+
         categorias = Categoria.objects.all()
-        postagens = Post.objects.filter(usuario=request.user)
-        return render(request, 'blog/index.html', {"categorias": categorias, "postagens": postagens})
+        postagens = Post.objects.all()
+        return render(request, 'blog/index.html', {"categorias": categorias, "postagens": postagens, })
     return HttpResponseRedirect(reverse('login'))
 
 
@@ -107,3 +108,22 @@ def atualizarPostagem(request):
         postagem.conteudo = conteudo
         postagem.save()
         return HttpResponseRedirect(reverse('index'))
+
+
+def postagemView(request, id):
+    postagem = Post.objects.get(pk=id)
+    comentarios = Comentarios.objects.filter(postagem=postagem)
+    return render(request, 'blog/post.html', {"postagem": postagem, "comentarios": comentarios})
+
+
+def comentario(request, id):
+
+    if request.method == "POST":
+        postagem = Post.objects.get(pk=id)
+        autor = request.user
+        mensagem = request.POST['mensagemComentario']
+
+        comentario = Comentarios(
+            usuario=autor, mensagem=mensagem, postagem=postagem)
+        comentario.save()
+        return HttpResponseRedirect(reverse('postagemView', args=[id]))

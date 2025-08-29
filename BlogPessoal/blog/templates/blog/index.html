@@ -52,14 +52,16 @@
 </div>
 
 <div>
-    <h2>Lista de postagens:</h2>
+    <h2>Postagens:</h2>
     <hr>
     {% for p in postagens %}
-    <p>{{p.titulo}}</p>
+    <a href="{% url 'postagemView' p.id %}">{{p.titulo}}</a>
     <p>{{p.usuario}}</p>
     <p>{{p.categoria}}</p>
     <p>{{p.dataPostagem}}</p>
     <p>{{p.conteudo}}</p>
+
+    <p>Comentários: {{ p.p.count }}</p>
     <button class="jsBtnAtualizar" data-id={{p.id}} data-titulo={{p.titulo}} data-categoria={{p.categoria}}
         data-conteudo={{p.conteudo}}>Editar</button>
     <form action="{% url 'remover1' p.id %}">
