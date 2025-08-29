@@ -2,7 +2,8 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
-from .models import Categoria
+from .models import Categoria, Post
+from django.utils import timezone
 
 # Create your tests here.
 
@@ -19,6 +20,13 @@ class Testes(TestCase):
         self.c1 = Categoria.objects.create(nome="a", usuario=self.u1)
         self.c2 = Categoria.objects.create(nome="b", usuario=self.u1)
         self.c13 = Categoria.objects.create(nome="c", usuario=self.u1)
+
+        self.p1 = Post.objects.create(titulo="e", categoria=self.c1, dataPostagem=timezone.now(
+        ), usuario=self.u1, conteudo="eeeeeeeeeeeee")
+        self.p2 = Post.objects.create(titulo="f", categoria=self.c1, dataPostagem=timezone.now(
+        ), usuario=self.u1, conteudo="fffffffffffff")
+        self.p3 = Post.objects.create(titulo="g", categoria=self.c1, dataPostagem=timezone.now(
+        ), usuario=self.u1, conteudo="ggggggggggggg")
     # Testes de cadstro/usuarios/tela principal
 
     def test_index(self):
@@ -57,3 +65,9 @@ class Testes(TestCase):
         """Testando inserção de categorias"""
         categorias = Categoria.objects.all()
         self.assertEqual(categorias.count(), 3)
+
+    # teste de inserção de postagem
+    def test_postagens(self):
+        """testando isnerção de postagens"""
+        postagens = Post.objects.all()
+        self.assertEqual(postagens.count(), 3)

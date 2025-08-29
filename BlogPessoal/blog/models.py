@@ -11,3 +11,16 @@ class Categoria(models.Model):
 
     def __str__(self):
         return f"{self.nome}"
+
+
+class Post(models.Model):
+    titulo = models.CharField(max_length=64)
+    categoria = models.ForeignKey(
+        Categoria, on_delete=models.CASCADE, related_name="postsCategoria")
+    conteudo = models.CharField(max_length=1000)
+    usuario = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="postsUsuario")
+    dataPostagem = models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.titulo} - {self.usuario} - {self.dataPostagem}"

@@ -4,7 +4,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Categoria
+from .models import Categoria, Post
+from django.utils import timezone
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -12,8 +14,9 @@ from .models import Categoria
 
 def index(request):
     if request.user.is_authenticated:
-
-        return render(request, 'blog/index.html',)
+        categorias = Categoria.objects.all()
+        postagens = Post.objects.filter(usuario=request.user)
+        return render(request, 'blog/index.html', {"categorias": categorias, "postagens": postagens})
     return HttpResponseRedirect(reverse('login'))
 
 
@@ -63,3 +66,17 @@ def categoria(request):
         return HttpResponseRedirect(reverse('categoria'))
     categorias = Categoria.objects.all()
     return render(request, 'blog/categoria.html', {"categorias": categorias})
+
+
+def post(request):
+    if request.method == "POST":
+        titulo = request.POST['tituloPost']
+        categoria_id = request.POST['categoriaPost']
+        conteudo = request.POST['conteudoPost']
+        usuario = request.user
+        dataPostagem = timezone.now()
+        categoria = get_object_or_404(Categoria, id=categoria_id)
+        postagem = Post(titulo=titulo, categoria=categoria,
+                        conteudo=conteudo, usuario=usuario, dataPostagem=dataPostagem)
+        postagem.save()
+        return HttpResponseRedirect(reverse('index'))
