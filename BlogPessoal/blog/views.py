@@ -172,3 +172,20 @@ def deslikePerfil(request, id):
         postagem = Post.objects.get(pk=id)
         postagem.likes.remove(request.user)
         return HttpResponseRedirect(reverse('perfil'))
+
+
+def likesCategoria(request, id):
+    if request.method == "POST":
+        postagem = Post.objects.get(pk=id)
+        postagem.likes.add(request.user)
+        postagem.save()
+        idCategoria = postagem.categoria.id
+        return HttpResponseRedirect(reverse('postCategoria', args=[idCategoria]))
+
+
+def deslikeCategoria(request, id):
+    if request.method == "POST":
+        postagem = Post.objects.get(pk=id)
+        postagem.likes.remove(request.user)
+        idCategoria = postagem.categoria.id
+        return HttpResponseRedirect(reverse('postCategoria', args=[idCategoria]))

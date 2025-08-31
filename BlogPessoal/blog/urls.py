@@ -20,5 +20,7 @@ urlpatterns = [
     path("deslike/<int:id>", views.deslike, name="deslike"),
     path('likesPerfil<int:id>', views.likesPerfil, name="likesPerfil"),
     path('deslikePerfil/<int:id>', views.deslikePerfil, name="deslikePerfil"),
+    path('likesCategoria/<int:id>', views.likesCategoria, name="likesCategoria"),
+    path('deslikeCategoria/<int:id>', views.deslikeCategoria, name="deslikeCategoria"),
     
 ]
