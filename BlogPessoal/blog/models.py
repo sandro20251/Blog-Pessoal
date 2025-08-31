@@ -21,6 +21,7 @@ class Post(models.Model):
     usuario = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="postsUsuario")
     dataPostagem = models.DateTimeField()
+    likes = models.ManyToManyField(User, blank=True, related_name="likesUsuario", null=True)
 
     def __str__(self):
         return f"{self.titulo} - {self.usuario} - {self.dataPostagem}"

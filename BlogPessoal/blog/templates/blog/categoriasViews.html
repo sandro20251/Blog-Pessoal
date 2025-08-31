@@ -1,0 +1,10 @@
+{% extends 'blog/layout.html' %}
+
+{% block body %}
+<div>
+    <h2>Todas categorias:</h2>
+    {% for c in categorias %}
+    <p><a href="{% url 'postCategoria' c.id %}">{{c.nome}}</a></p>
+    {% endfor %}
+</div>
+{% endblock %}

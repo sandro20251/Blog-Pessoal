@@ -98,13 +98,9 @@ def atualizarPostagem(request):
     if request.method == "POST":
         id = request.POST['idAtualizarPostagem']
         titulo = request.POST['tituloPostA']
-        categoria = request.POST['categoriaPostA']
-        categoriaObjeto = Categoria.objects.get(id=categoria)
         conteudo = request.POST['conteudoPostA']
-
         postagem = Post.objects.get(pk=id)
         postagem.titulo = titulo
-        postagem.categoria = categoriaObjeto
         postagem.conteudo = conteudo
         postagem.save()
         return HttpResponseRedirect(reverse('index'))
@@ -127,3 +123,52 @@ def comentario(request, id):
             usuario=autor, mensagem=mensagem, postagem=postagem)
         comentario.save()
         return HttpResponseRedirect(reverse('postagemView', args=[id]))
+
+
+def perfil(request):
+    postagens = Post.objects.filter(usuario=request.user)
+    return render(request, 'blog/perfil.html', {"postagens": postagens})
+
+
+def mostrarCategorias(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'blog/categoriasViews.html', {"categorias": categorias})
+
+
+def postCategoria(request, id):
+    categoria = Categoria.objects.get(pk=id)
+    postagens = Post.objects.filter(categoria=categoria)
+    return render(request, 'blog/postagensPorCategoria.html', {
+        "postagens": postagens,
+
+    })
+
+
+def likes(request, id):
+    if request.method == "POST":
+        postagem = Post.objects.get(pk=id)
+        postagem.likes.add(request.user)
+        postagem.save()
+        return HttpResponseRedirect(reverse('index'))
+
+
+def deslike(request, id):
+    if request.method == "POST":
+        postagem = Post.objects.get(pk=id)
+        postagem.likes.remove(request.user)
+        return HttpResponseRedirect(reverse('index'))
+
+
+def likesPerfil(request, id):
+    if request.method == "POST":
+        postagem = Post.objects.get(pk=id)
+        postagem.likes.add(request.user)
+        postagem.save()
+        return HttpResponseRedirect(reverse('perfil'))
+
+
+def deslikePerfil(request, id):
+    if request.method == "POST":
+        postagem = Post.objects.get(pk=id)
+        postagem.likes.remove(request.user)
+        return HttpResponseRedirect(reverse('perfil'))

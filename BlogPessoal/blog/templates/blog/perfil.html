@@ -2,30 +2,9 @@
 
 {% block body %}
 <div>
-    {% if request.user.is_authenticated %}
-    <h2>Bem vindo <a href="{% url 'perfil' %}">{{user.username}}</a></h2>
-    {% endif %}
-</div>
-<div>
-    <h2>Insira sua postagem</h2>
-    <form action="{% url 'post' %}" method="post">
-        {% csrf_token %}
-        <label>Título:</label><br>
-        <input type="text" name="tituloPost"><br>
-        <label>categoria:</label><br>
-        <select name="categoriaPost">
-            {% for c in categorias %}
-            <option value="{{c.id}}" name="categoriaPost">{{c.nome}}</option>
-            {% endfor %}
-        </select>
-        <br>
+    <h3><strong>Usuário: </strong><strong>{{user.username}}</strong></h3>
+    <h3><strong>Email: </strong><strong>{{user.email}}</strong></h3>
 
-        <label>conteúdo:</label><br>
-        <textarea name="conteudoPost"></textarea><br>
-        <button type="submit">Postar</button>
-
-    </form>
-    <hr>
 </div>
 <div id="jsAtualizarPostagem" class="hide">
     <h2>Atualize sua postagem aqui:</h2>
@@ -35,6 +14,9 @@
         <input type="number" name="idAtualizarPostagem" class="jsIdPostagemA" readonly><br>
         <label>Título:</label><br>
         <input type="text" name="tituloPostA" class="jsTituloPostagemA"><br>
+
+
+
         <label>conteúdo:</label><br>
         <textarea name="conteudoPostA" class="jsConteudoPostagemA"></textarea><br>
         <button type="submit">Atualizar</button>
@@ -42,7 +24,6 @@
     </form>
     <hr>
 </div>
-
 <div>
     <h2>Postagens:</h2>
     <hr>
@@ -52,14 +33,16 @@
     <p>{{p.categoria}}</p>
     <p>{{p.dataPostagem}}</p>
     <p>{{p.conteudo}}</p>
+
+    <p>Comentários: {{ p.p.count }}</p>
     <div class="btnPostagensPai">
-        <form action="{% url 'likes' p.id %}" method="post">
+        <form action="{% url 'likesPerfil' p.id %}" method="post">
             {% csrf_token %}
             <button type="submit" style="border:none; background-color: white;"><i class="fas fa-heart"
                     style="color:red;"></i></button>
 
         </form>
-        <form action="{% url 'deslike' p.id %}" method="post">
+        <form action="{% url 'deslikePerfil' p.id %}" method="post">
             {% csrf_token %}
             <button type="submit" style="background-color: white; border:none"><i class="fas fa-thumbs-down"
                     style="color:blue"></i></button>
@@ -68,11 +51,9 @@
         {{p.likes.count}}
 
     </div>
-
-    <p>Comentários: {{ p.p.count }}</p>
     {% if p.usuario == request.user %}
-    <button class="jsBtnAtualizar" data-id="{{p.id}}" data-titulo="{{p.titulo}}" data-categoria="{{p.categoria.id}}"
-        data-conteudo="{{p.conteudo}}">Editar</button>
+    <button class="jsBtnAtualizar" data-id={{p.id}} data-titulo={{p.titulo}} data-categoria={{p.categoria}}
+        data-conteudo={{p.conteudo}}>Editar</button>
     {% endif %}
     <form action="{% url 'remover1' p.id %}">
         <button type="submit" class="btnRemover">remover</button>
@@ -80,5 +61,4 @@
     <hr>
     {% endfor %}
 </div>
-
 {% endblock %}

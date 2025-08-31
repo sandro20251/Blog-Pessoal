@@ -99,9 +99,17 @@ class Testes(TestCase):
         postagem.save()
         self.assertEqual(postagem.conteudo, "zzz")
 
-    # testando isnerção de comentários
+    # testando inseerção de comentários
 
     def test_coment_inserir(self):
         """Testando inserção de comentários"""
         comentarios = Comentarios.objects.all()
         self.assertEqual(comentarios.count(), 3)
+
+    # testando rota de mostrar categorias
+
+    def test_categorias(self):
+        """Testando rota de mostrar categorias"""
+        c = Client()
+        response = c.get("/mostrarCategorias/")
+        self.assertEqual(response.status_code, 200)
