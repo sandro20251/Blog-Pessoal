@@ -1,84 +1,102 @@
 {% extends 'blog/layout.html' %}
 
 {% block body %}
-<div>
+<div class="apresentacao">
     {% if request.user.is_authenticated %}
     <h2>Bem vindo <a href="{% url 'perfil' %}">{{user.username}}</a></h2>
     {% endif %}
 </div>
-<div>
-    <h2>Insira sua postagem</h2>
-    <form action="{% url 'post' %}" method="post">
-        {% csrf_token %}
-        <label>Título:</label><br>
-        <input type="text" name="tituloPost"><br>
-        <label>categoria:</label><br>
-        <select name="categoriaPost">
-            {% for c in categorias %}
-            <option value="{{c.id}}" name="categoriaPost">{{c.nome}}</option>
-            {% endfor %}
-        </select>
-        <br>
-
-        <label>conteúdo:</label><br>
-        <textarea name="conteudoPost"></textarea><br>
-        <button type="submit">Postar</button>
-
-    </form>
-    <hr>
-</div>
-<div id="jsAtualizarPostagem" class="hide">
-    <h2>Atualize sua postagem aqui:</h2>
-    <form action="{% url 'atualizarPostagem' %}" method="post">
-        {% csrf_token %}
-        <label>Id:</label><br>
-        <input type="number" name="idAtualizarPostagem" class="jsIdPostagemA" readonly><br>
-        <label>Título:</label><br>
-        <input type="text" name="tituloPostA" class="jsTituloPostagemA"><br>
-        <label>conteúdo:</label><br>
-        <textarea name="conteudoPostA" class="jsConteudoPostagemA"></textarea><br>
-        <button type="submit">Atualizar</button>
-
-    </form>
-    <hr>
-</div>
-
-<div>
-    <h2>Postagens:</h2>
-    <hr>
-    {% for p in postagens %}
-    <a href="{% url 'postagemView' p.id %}">{{p.titulo}}</a>
-    <p>{{p.usuario}}</p>
-    <p>{{p.categoria}}</p>
-    <p>{{p.dataPostagem}}</p>
-    <p>{{p.conteudo}}</p>
-    <div class="btnPostagensPai">
-        <form action="{% url 'likes' p.id %}" method="post">
+<div class="inserirPostagem">
+    <div class="iptitulo">
+        <h2>Insira sua postagem</h2>
+    </div>
+    <div class="ipform">
+        <form action="{% url 'post' %}" method="post">
             {% csrf_token %}
-            <button type="submit" style="border:none; background-color: white;"><i class="fas fa-heart"
-                    style="color:red;"></i></button>
+            <label>Título:</label><br>
+            <input type="text" name="tituloPost"><br>
+            <label>categoria:</label><br>
+            <select name="categoriaPost">
+                {% for c in categorias %}
+                <option value="{{c.id}}" name="categoriaPost">{{c.nome}}</option>
+                {% endfor %}
+            </select>
+            <br>
+
+            <label>conteúdo:</label><br>
+            <textarea name="conteudoPost"></textarea><br>
+            <button type="submit">Postar</button>
 
         </form>
-        <form action="{% url 'deslike' p.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit" style="background-color: white; border:none"><i class="fas fa-thumbs-down"
-                    style="color:blue"></i></button>
-
-        </form>
-        {{ p.likes.count }}
-
     </div>
 
-    <p>Comentários: {{ p.p.count }}</p>
-    {% if p.usuario == request.user %}
-    <button class="jsBtnAtualizar" data-id="{{p.id}}" data-titulo="{{p.titulo}}" data-categoria="{{p.categoria.id}}"
-        data-conteudo="{{p.conteudo}}">Editar</button>
-    {% endif %}
-    <form action="{% url 'remover1' p.id %}">
-        <button type="submit" class="btnRemover">remover</button>
-    </form>
-    <hr>
-    {% endfor %}
+
+</div>
+<div id="jsAtualizarPostagem" class="hide">
+    <div class="aptitulo">
+        <h2>Atualize sua postagem aqui:</h2>
+    </div>
+    <div class="apform">
+        <form action="{% url 'atualizarPostagem' %}" method="post">
+            {% csrf_token %}
+            <label>Id:</label><br>
+            <input type="number" name="idAtualizarPostagem" class="jsIdPostagemA" readonly><br>
+            <label>Título:</label><br>
+            <input type="text" name="tituloPostA" class="jsTituloPostagemA"><br>
+            <label>conteúdo:</label><br>
+            <textarea name="conteudoPostA" class="jsConteudoPostagemA"></textarea><br>
+            <button type="submit">Atualizar</button>
+
+        </form>
+    </div>
+
+
+</div>
+
+<div>
+    <div class="ipp">
+        <h2>Postagens:</h2>
+    </div>
+
+    <div class="postagens">
+        {% for p in postagens %}
+        <div class="postagem">
+            <a href="{% url 'postagemView' p.id %}">{{p.titulo}}</a>
+            <p>{{p.usuario}}</p>
+            <p>{{p.categoria}}</p>
+            <p>{{p.dataPostagem}}</p>
+            <p>{{p.conteudo}}</p>
+            <div class="btnPostagensPai">
+                <form action="{% url 'likes' p.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" style="border:none; background-color: white;"><i class="fas fa-heart"
+                            style="color:red;"></i></button>
+
+                </form>
+                <form action="{% url 'deslike' p.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" style="background-color: white; border:none"><i class="fas fa-thumbs-down"
+                            style="color:blue"></i></button>
+
+                </form>
+                {{ p.likes.count }}
+
+            </div>
+
+            <p>Comentários: {{ p.p.count }}</p>
+            {% if p.usuario == request.user %}
+            <button class="jsBtnAtualizar" data-id="{{p.id}}" data-titulo="{{p.titulo}}"
+                data-categoria="{{p.categoria.id}}" data-conteudo="{{p.conteudo}}" id="btnAtualizar">Editar</button>
+            {% endif %}
+            <form action="{% url 'remover1' p.id %}">
+                <button type="submit" class="btnRemover">remover</button>
+            </form>
+
+        </div>
+
+        {% endfor %}
+    </div>
+
 </div>
 
 {% endblock %}
