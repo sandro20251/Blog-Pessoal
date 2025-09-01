@@ -17,6 +17,7 @@
         <h1>Blog Pessoal</h1>
     </header>
     <nav>
+        <a href="{% url 'apresentacao' %}">sobre mim</a>
         <a href="{% url 'mostrarCategorias' %}">Categoria</a>
         <a href="{% url 'perfil' %}">Perfil</a>
         <a href="{% url 'categoria' %}">Nova categoria</a>
@@ -25,6 +26,14 @@
         <a href="{% url 'logout' %}">Logout</a>
         <a href="{% url 'register'%}">Cadastre-se</a>
     </nav>
+    <div class="pesquisaPost">
+        <form action="{% url 'buscarTituloPostagem' %}" method="post">
+            {% csrf_token %}
+            <label><strong>Digite o título buscado:</strong></label><br>
+            <input type="text " name="tituloPostBuscado"><br>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
     {% block body %}{% endblock %}
     <script src="{% static 'blog/script.js' %}"></script>
 </body>

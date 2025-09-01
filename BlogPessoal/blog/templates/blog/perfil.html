@@ -8,7 +8,7 @@
 </div>
 <div id="jsAtualizarPostagem" class="hide">
     <h2>Atualize sua postagem aqui:</h2>
-    <form action="{% url 'atualizarPostagem' %}" method="post">
+    <form action="{% url 'atualizarPostagemPerfil' %}" method="post">
         {% csrf_token %}
         <label>Id:</label><br>
         <input type="number" name="idAtualizarPostagem" class="jsIdPostagemA" readonly><br>

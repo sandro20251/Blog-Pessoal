@@ -21,6 +21,20 @@ urlpatterns = [
     path('likesPerfil<int:id>', views.likesPerfil, name="likesPerfil"),
     path('deslikePerfil/<int:id>', views.deslikePerfil, name="deslikePerfil"),
     path('likesCategoria/<int:id>', views.likesCategoria, name="likesCategoria"),
-    path('deslikeCategoria/<int:id>', views.deslikeCategoria, name="deslikeCategoria"),
-    
+    path('deslikeCategoria/<int:id>',
+         views.deslikeCategoria, name="deslikeCategoria"),
+    path('likesPostagem/<int:id>', views.likesPostagem, name="likesPostagem"),
+    path('deslikePostagem/<int:id>', views.deslikePostagem, name="deslikePostagem"),
+    path('apresentacao/', views.apresentacao, name="apresentacao"),
+    path('buscarTituloPostagem/', views.buscarTituloPostagem,
+         name="buscarTituloPostagem"),
+
+    path('atualizarPostagemPerfil/', views.atualizarPostagemPerfil,
+         name="atualizarPostagemPerfil"),
+    path('atualizarPostagemView/', views.atualizarPostagemView,
+         name="atualizarPostagemView"),
+    path('atualizarPostagemPost/', views.atualizarPostagemPost,
+         name='atualizarPostagemPost')
+
+
 ]

@@ -5,7 +5,7 @@
 
 <div id="jsAtualizarPostagem" class="hide">
     <h2>Atualize sua postagem aqui:</h2>
-    <form action="{% url 'atualizarPostagem' %}" method="post">
+    <form action="{% url 'atualizarPostagemPost' %}" method="post">
         {% csrf_token %}
         <label>Id:</label><br>
         <input type="number" name="idAtualizarPostagem" class="jsIdPostagemA" readonly><br>
@@ -47,7 +47,7 @@
 
     </div>
     {% if p.usuario == request.user %}
-    <button class="jsBtnAtualizar" data-id="{{p.id}}" data-titulo="{{p.titulo}}" data-categoria="{{p.categoria.id}}"
+    <button class="jsBtnAtualizar" data-id="{{p.id}}" data-titulo="{{p.titulo}}" 
         data-conteudo="{{p.conteudo}}">Editar</button>
     {% endif %}
     <form action="{% url 'remover1' p.id %}">

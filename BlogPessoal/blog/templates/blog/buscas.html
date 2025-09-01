@@ -1,0 +1,8 @@
+{% extends 'blog/layout.html' %}
+
+{% block body %}
+{% for b in buscas %}
+<a href="{% url 'postagemView' b.id %}">{{b.titulo}}</a>
+
+{% endfor %}
+{% endblock %}

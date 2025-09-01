@@ -113,3 +113,13 @@ class Testes(TestCase):
         c = Client()
         response = c.get("/mostrarCategorias/")
         self.assertEqual(response.status_code, 200)
+
+    # testando rota sobremim
+
+    def test_sobremim(self):
+        """Testando rota sobre mim"""
+        c = Client()
+        response = c.get('/apresentacao/')
+        self.assertEqual(response.status_code, 200)
+
+    # testando rota de busca por título

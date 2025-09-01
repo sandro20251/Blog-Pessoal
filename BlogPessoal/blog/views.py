@@ -189,3 +189,67 @@ def deslikeCategoria(request, id):
         postagem.likes.remove(request.user)
         idCategoria = postagem.categoria.id
         return HttpResponseRedirect(reverse('postCategoria', args=[idCategoria]))
+
+
+def likesPostagem(request, id):
+    if request.method == "POST":
+        postagem = Post.objects.get(pk=id)
+        postagem.likes.add(request.user)
+        postagem.save()
+
+        return HttpResponseRedirect(reverse('postagemView', args=[postagem.id]))
+
+
+def deslikePostagem(request, id):
+    if request.method == "POST":
+        postagem = Post.objects.get(pk=id)
+        postagem.likes.remove(request.user)
+        return HttpResponseRedirect(reverse('postagemView', args=[postagem.id]))
+
+
+def apresentacao(request):
+    return render(request, 'blog/sobremim.html')
+
+
+def buscarTituloPostagem(request):
+    if request.method == "POST":
+        titulobuscado = request.POST['tituloPostBuscado']
+        busca = Post.objects.filter(titulo=titulobuscado)
+        return render(request, 'blog/buscas.html', {"buscas": busca})
+
+
+def atualizarPostagemPerfil(request):
+    if request.method == "POST":
+        id = request.POST['idAtualizarPostagem']
+        titulo = request.POST['tituloPostA']
+        conteudo = request.POST['conteudoPostA']
+        postagem = Post.objects.get(pk=id)
+        postagem.titulo = titulo
+        postagem.conteudo = conteudo
+        postagem.save()
+        return HttpResponseRedirect(reverse('perfil'))
+
+
+def atualizarPostagemView(request):
+    if request.method == "POST":
+        id = request.POST['idAtualizarPostagem']
+        titulo = request.POST['tituloPostA']
+        conteudo = request.POST['conteudoPostA']
+        postagem = Post.objects.get(pk=id)
+        postagem.titulo = titulo
+        postagem.conteudo = conteudo
+        postagem.save()
+        return HttpResponseRedirect(reverse('postagemView', args=[postagem.id]))
+
+
+def atualizarPostagemPost(request):
+    if request.method == "POST":
+        id = request.POST['idAtualizarPostagem']
+        titulo = request.POST['tituloPostA']
+        conteudo = request.POST['conteudoPostA']
+        postagem = Post.objects.get(pk=id)
+        postagem.titulo = titulo
+        postagem.conteudo = conteudo
+        idCategoria = postagem.categoria.id
+        postagem.save()
+        return HttpResponseRedirect(reverse('postCategoria', args=[idCategoria]))

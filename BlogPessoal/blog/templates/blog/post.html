@@ -2,17 +2,56 @@
 
 {% block body %}
 {{user.username}}
+
+<div id="jsAtualizarPostagem" class="hide">
+    <h2>Atualize sua postagem aqui:</h2>
+    <form action="{% url 'atualizarPostagemView' %}" method="post">
+        {% csrf_token %}
+        <label>Id:</label><br>
+        <input type="number" name="idAtualizarPostagem" class="jsIdPostagemA" readonly><br>
+        <label>Título:</label><br>
+        <input type="text" name="tituloPostA" class="jsTituloPostagemA"><br>
+        <label>conteúdo:</label><br>
+        <textarea name="conteudoPostA" class="jsConteudoPostagemA"></textarea><br>
+        <button type="submit">Atualizar</button>
+
+    </form>
+    <hr>
+</div>
+<hr>
 <div>
     <h2>{{postagem.titulo}}</h2>
     <p><strong>Data de postagem:</strong>{{postagem.dataPostagem}}</p>
     <p><strong>Autor:</strong>{{postagem.usuario}}</p>
     <p><strong>Categoria:</strong>{{postagem.categoria}}</p>
     <p><strong>Postagem:</strong>{{postagem.conteudo}}</p>
+    <div class="btnPostagensPai">
+        <form action="{% url 'likesPostagem' postagem.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="border:none; background-color: white;"><i class="fas fa-heart"
+                    style="color:red;"></i></button>
 
+        </form>
+        <form action="{% url 'deslikePostagem' postagem.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="background-color: white; border:none"><i class="fas fa-thumbs-down"
+                    style="color:blue"></i></button>
+
+        </form>
+        {{postagem.likes.count}}
+
+
+
+    </div>
+    {% if postagem.usuario == request.user %}
+    <button class="jsBtnAtualizar" data-id="{{postagem.id}}" data-titulo="{{postagem.titulo}}"
+        data-categoria="{{postagem.categoria.id}}" data-conteudo="{{postagem.conteudo}}">Editar</button>
+    {% endif %}
     <button class="jsBtnComentario">Adicione um comentário</button>
 
 </div>
 <hr>
+
 <div id="jsAddComentario" class="hide">
     <h2>Adicione seu comentário:</h2>
     <form action="{% url 'comentario' postagem.id %}" method="post">
