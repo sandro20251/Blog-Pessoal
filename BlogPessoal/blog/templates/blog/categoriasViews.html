@@ -2,9 +2,14 @@
 
 {% block body %}
 <div>
-    <h2>Todas categorias:</h2>
-    {% for c in categorias %}
-    <p><a href="{% url 'postCategoria' c.id %}">{{c.nome}}</a></p>
-    {% endfor %}
+    <div class="tituloCategoriasList">
+        <h2>Todas categorias:</h2>
+    </div>
+    <div class="todasCategorias">
+        {% for c in categorias %}
+        <p><a href="{% url 'postCategoria' c.id %}">{{c.nome}}</a></p>
+        {% endfor %}
+    </div>
+
 </div>
 {% endblock %}

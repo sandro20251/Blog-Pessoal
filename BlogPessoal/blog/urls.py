@@ -34,7 +34,9 @@ urlpatterns = [
     path('atualizarPostagemView/', views.atualizarPostagemView,
          name="atualizarPostagemView"),
     path('atualizarPostagemPost/', views.atualizarPostagemPost,
-         name='atualizarPostagemPost')
+         name='atualizarPostagemPost'),
+     path('removerCategoria/<int:id>', views.removerCategoria, name="removerCategoria"),
+     path('atualizarCategoria/', views.atualizarCategoria, name="atualizarCategoria2"),
 
 
 ]

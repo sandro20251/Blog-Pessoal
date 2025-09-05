@@ -3,72 +3,103 @@
 {% block body %}
 {{user.username}}
 
-<div id="jsAtualizarPostagem" class="hide">
-    <h2>Atualize sua postagem aqui:</h2>
-    <form action="{% url 'atualizarPostagemView' %}" method="post">
-        {% csrf_token %}
-        <label>Id:</label><br>
-        <input type="number" name="idAtualizarPostagem" class="jsIdPostagemA" readonly><br>
-        <label>Título:</label><br>
-        <input type="text" name="tituloPostA" class="jsTituloPostagemA"><br>
-        <label>conteúdo:</label><br>
-        <textarea name="conteudoPostA" class="jsConteudoPostagemA"></textarea><br>
-        <button type="submit">Atualizar</button>
+<div id="jsAtualizarPostagem" class="hide" class="pppai">
+    <div id="titulopp">
+        <h2>Atualize sua postagem aqui:</h2>
+    </div>
+    <div id="formpp">
+        <form action="{% url 'atualizarPostagemView' %}" method="post">
+            {% csrf_token %}
+            <label>Id:</label><br>
+            <input type="number" name="idAtualizarPostagem" class="jsIdPostagemA" readonly><br>
+            <label>Título:</label><br>
+            <input type="text" name="tituloPostA" class="jsTituloPostagemA"><br>
+            <label>conteúdo:</label><br>
+            <textarea name="conteudoPostA" class="jsConteudoPostagemA"></textarea><br>
+            <button type="submit">Atualizar</button>
 
-    </form>
-    <hr>
+        </form>
+    </div>
+
+
 </div>
 <hr>
 <div>
-    <h2>{{postagem.titulo}}</h2>
-    <p><strong>Data de postagem:</strong>{{postagem.dataPostagem}}</p>
-    <p><strong>Autor:</strong>{{postagem.usuario}}</p>
-    <p><strong>Categoria:</strong>{{postagem.categoria}}</p>
-    <p><strong>Postagem:</strong>{{postagem.conteudo}}</p>
-    <div class="btnPostagensPai">
-        <form action="{% url 'likesPostagem' postagem.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit" style="border:none; background-color: white;"><i class="fas fa-heart"
-                    style="color:red;"></i></button>
+    <div id="pp2titulo">
+        <h2>{{postagem.titulo}}</h2>
+    </div>
+    <div id="pp2form">
+        <p><strong>Data de postagem:</strong>{{postagem.dataPostagem}}</p>
+        <p><strong>Autor:</strong>{{postagem.usuario}}</p>
+        <p><strong>Categoria:</strong>{{postagem.categoria}}</p>
+        <p><strong>Postagem:</strong>{{postagem.conteudo}}</p>
+        <div class="btnPostagensPai">
+            <form action="{% url 'likesPostagem' postagem.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" style="border:none; background-color: white;"><i class="fas fa-heart"
+                        style="color:red;"></i></button>
 
-        </form>
-        <form action="{% url 'deslikePostagem' postagem.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit" style="background-color: white; border:none"><i class="fas fa-thumbs-down"
-                    style="color:blue"></i></button>
+            </form>
+            <form action="{% url 'deslikePostagem' postagem.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" style="background-color: white; border:none"><i class="fas fa-thumbs-down"
+                        style="color:blue"></i></button>
 
-        </form>
-        {{postagem.likes.count}}
+            </form>
+            {{postagem.likes.count}}
+
+        </div>
+        <div id="btnpp12">
+            <div>{% if postagem.usuario == request.user %}
+                <button class="jsBtnAtualizar" data-id="{{postagem.id}}" data-titulo="{{postagem.titulo}}"
+                    data-categoria="{{postagem.categoria.id}}" data-conteudo="{{postagem.conteudo}}"
+                    id="btnp10">Editar</button>
+                {% endif %}
+            </div>
+            <div><button class="jsBtnComentario" id="btnp11">Adicione um comentário</button></div>
+        </div>
+
+        <br>
+
 
 
 
     </div>
-    {% if postagem.usuario == request.user %}
-    <button class="jsBtnAtualizar" data-id="{{postagem.id}}" data-titulo="{{postagem.titulo}}"
-        data-categoria="{{postagem.categoria.id}}" data-conteudo="{{postagem.conteudo}}">Editar</button>
-    {% endif %}
-    <button class="jsBtnComentario">Adicione um comentário</button>
+
 
 </div>
 <hr>
 
-<div id="jsAddComentario" class="hide">
-    <h2>Adicione seu comentário:</h2>
-    <form action="{% url 'comentario' postagem.id %}" method="post">
-        {% csrf_token %}
-        <label>Mensagem:</label><br>
-        <textarea name="mensagemComentario"></textarea><br>
-        <button type="submit">Enviar</button>
-    </form>
+<div id="jsAddComentario" class="hide" class="pp15">
+    <div id="pp13">
+        <h2>Adicione seu comentário:</h2>
+    </div>
+    <div id="pp14">
+        <form action="{% url 'comentario' postagem.id %}" method="post">
+            {% csrf_token %}
+            <label><strong>Mensagem:</strong></label><br>
+            <textarea name="mensagemComentario"></textarea><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
 
 </div>
 <hr>
 <div>
-    <h2>Comentários da postagem</h2>
-    {% for c in comentarios %}
-    <p><Strong>Autor:</Strong>{{c.usuario}}</p>
-    <p><strong>Comentário:</strong>{{c.mensagem}}</p>
-    {% endfor %}
+    <div class="pp16">
+        <h2>Comentários da postagem</h2>
+    </div>
+    <div class="pp17">
+        {% for c in comentarios %}
+        <div class="pp18">
+            <p><Strong>Autor:</Strong>{{c.usuario}}</p>
+            <p><strong>Comentário:</strong>{{c.mensagem}}</p>
+        </div>
+
+        {% endfor %}
+    </div>
+
 </div>
 <hr>
 {% endblock %}

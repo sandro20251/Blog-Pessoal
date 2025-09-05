@@ -1,17 +1,27 @@
 {% extends 'blog/layout.html' %}
-
 {% block body %}
-{% if mensagem %}
-{{mensagem}}
-{% endif %}
-<h2>Faça seu Login:</h2>
-<form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
-    <label>Usuário:</label><br>
-    <input type="text" name="username"><br>
-    <label>Senha:</label><br>
-    <input type="password" name="password"><br>
-    <button type="submit">Validar</button>
-</form>
-<hr>
+<div class="loginPai">
+    <div id="mensagemLogin">
+        {% if mensagem %}
+        {{mensagem}}
+        {% endif %}
+    </div>
+
+    <div id="tituloLogin">
+        <h2>Faça seu Login:</h2>
+    </div>
+    <div id="formLogin">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <label>Usuário:</label><br>
+            <input type="text" name="username"><br>
+            <label>Senha:</label><br>
+            <input type="password" name="password"><br>
+            <button type="submit" id="btnLogin">Validar</button>
+        </form>
+    </div>
+
+</div>
+
+
 {% endblock %}

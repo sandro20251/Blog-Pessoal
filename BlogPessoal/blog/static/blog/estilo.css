@@ -64,17 +64,118 @@ select {
 .ipform,
 .aptitulo,
 .apform,
-.ipp {
+.ipp,
+#mensagemLogin,
+#tituloLogin,
+#formLogin,
+.tituloRegister,
+.formRegister,
+#tituloAddCategoria,
+#formAddCategoria,
+#tituloAtualizarCategoria,
+#formAtualizarCategoria,
+#tituloCategorias,
+.tituloPerfilPostagens,
+.tituloCategoriasList,
+.tituloEditarPerfil,
+.p6 {
     display: flex;
     justify-content: center;
 }
 
-.ipform,
-.apform {
+.editPai,
+.p2,
+.p5 {
+    display: flex;
+    justify-content: center;
+}
+
+#btnEditarPerfil {
+    width: 170px;
+    margin: 5px;
+
+}
+
+.botoesPerfil {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 5px;
+}
+
+.btn2Perfil {
+    display: flex;
+    justify-content: center;
+}
+
+.formEditarPerfil {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
     border: 1px solid black;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
+    width: 250px;
+
+}
+
+.p4 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 250px;
+}
+
+.p3 {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.todasCategorias {
+    display: flex;
+
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#bp1,
+#bp2 {
+    width: 170px;
+}
+
+
+
+
+.p7 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    width: 250px;
+
+}
+
+.ipform>form,
+.apform>form {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px;
     text-align: center;
 }
 
@@ -85,7 +186,7 @@ select {
 .apform>form>textarea,
 .apform>form>button {
     width: 170px;
-    margin: 2px;
+
 }
 
 .postagens {
@@ -94,7 +195,37 @@ select {
     justify-content: center;
 }
 
+#tituloConfRem {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
 
+
+
+}
+
+.postagens {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.postagemP {
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+}
 
 .postagem {
     border: 1px solid black;
@@ -109,6 +240,187 @@ select {
     display: flex;
     justify-content: center;
 }
+
+#mensagemLogin {
+    margin: 10px;
+    padding: 10px;
+}
+
+
+
+#formLogin>form,
+.formRegister>form {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+#btnLogin,
+#btnRegister,
+#btnAtualizar,
+.btnRemover,
+.apform#btnAtualizar,
+#btnConfRem1,
+#btnConfRem2 {
+
+
+    width: 170px;
+}
+
+#btnPostagens {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.categoriaUnitaria {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid black;
+    flex-direction: column;
+    border-radius: 5px;
+    width: 150px;
+    margin: 10px;
+    padding: 10px;
+
+}
+
+#categorias {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#usuarioPerfil {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    gap: 10px;
+    text-align: center;
+
+}
+
+#buscasTitulo {
+    display: flex;
+    justify-content: center;
+
+}
+
+#buscasBuscas {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+#titulopp,
+#pp2titulo {
+    display: flex;
+    justify-content: center;
+}
+
+#formpp {
+    display: flex;
+    justify-content: center;
+
+
+}
+
+#formpp>form {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 400px;
+}
+
+#pp2form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+#btnp10,
+#btnp11 {
+    width: 170px;
+}
+
+#btnpp12 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px;
+}
+
+#pp13 {
+    display: flex;
+    justify-content: center;
+
+}
+
+#pp14 {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+
+    text-align: center;
+}
+
+#pp14>form>textarea {
+    height: 200px;
+    width: 250px;
+    margin: 10px;
+}
+
+.pp16 {
+    display: flex;
+    justify-content: center;
+}
+
+.pp17 {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.pp18 {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 250px;
+    margin: 10px;
+    padding: 10px;
+}
+
+
 
 
 
@@ -160,6 +472,15 @@ select {
         margin: 10px;
         padding: 10px;
         width: 250px;
+    }
+
+    #btnLogin,
+    #btnRegister,
+    #btnAtualizar,
+    .btnRemover {
+        margin-top: 10px;
+
+        width: 170px;
     }
 
 

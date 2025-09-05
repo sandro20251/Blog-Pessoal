@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let tituloAtualizar = document.querySelector('.jsTituloPostagemA');
     let conteudoAtualizar = document.querySelector('.jsConteudoPostagemA');
-    let idAtualizar = document.querySelector('.jsIdPostagemA')
+    let idAtualizar = document.querySelector('.jsIdPostagemA');
+    let idCategoriaAtualizar = document.querySelector('#idCategoria');
+    let nomeCategoria = document.querySelector('#nomeCategoria');
 
 
 
@@ -23,7 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
             comentario.classList.toggle('hide');
         }
 
+        const btnCategoriaAtualziar = e.target.closest('.jsCategoriaAtualizar')
+        if (btnCategoriaAtualziar) {
+            const atualizarCategoria = document.querySelector('#atualizarCategoriajs');
+            atualizarCategoria.classList.toggle('hide');
 
+            idCategoriaAtualizar.value = btnCategoriaAtualziar.dataset.id;
+            nomeCategoria.value = btnCategoriaAtualziar.dataset.nome;
+            console.log(idCategoriaAtualizar);
+        }
 
     })
 

@@ -84,13 +84,25 @@
             </div>
 
             <p>Comentários: {{ p.p.count }}</p>
-            {% if p.usuario == request.user %}
-            <button class="jsBtnAtualizar" data-id="{{p.id}}" data-titulo="{{p.titulo}}"
-                data-categoria="{{p.categoria.id}}" data-conteudo="{{p.conteudo}}" id="btnAtualizar">Editar</button>
-            {% endif %}
-            <form action="{% url 'remover1' p.id %}">
-                <button type="submit" class="btnRemover">remover</button>
-            </form>
+
+            <div id="btnPostagens">
+                <div>
+                    {% if p.usuario == request.user %}
+                    <button class="jsBtnAtualizar" data-id="{{p.id}}" data-titulo="{{p.titulo}}"
+                        data-categoria="{{p.categoria.id}}" data-conteudo="{{p.conteudo}}"
+                        id="btnAtualizar">Editar</button>
+                    {% endif %}
+
+                </div>
+                <div>
+                    <form action="{% url 'remover1' p.id %}">
+                        <button type="submit" class="btnRemover">remover</button>
+                    </form>
+                </div>
+
+
+            </div>
+
 
         </div>
 

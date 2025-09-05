@@ -1,30 +1,57 @@
 {% extends 'blog/layout.html' %}
 
 {% block body %}
-<h2>Insira uma novca categoria</h2>
-<form action="{% url 'categoria' %}" method="post">
-    {% csrf_token %}
-    <label>Nome da categoria:</label>
-    <input type="text" name="categoriaCategoria">
-    <button type="submit">Adicionar</button>
-</form>
-<hr>
-<h2>Atualize a categoria:</h2>
-<form action="#">
-    {% csrf_token %}
-    <label>Nome da categoria:</label>
-    <input type="text" name="atualizarCategoria">
-    <button type="submit">Atualizar</button>
-</form>
-<hr>
-<h2>Lista de categorias:</h2>
-{% for c in categorias %}
-<p>{{c.nome}}</p>
-<button>Atualziar</button>
-<form action="#">
-    {% csrf_token %}
-    <button type="submit">Remover</button>
-</form>
-{% endfor %}
+<div id="tituloAddCategoria">
+    <h2>Insira uma nova categoria</h2>
+</div>
+<div id="formAddCategoria">
+    <form action="{% url 'categoria' %}" method="post">
+        {% csrf_token %}
+        <label>Nome da categoria:</label>
+        <input type="text" name="categoriaCategoria">
+        <button type="submit">Adicionar</button>
+    </form>
+</div>
+<div id="atualizarCategoriajs" class="hide">
+    <div id="tituloAtualizarCategoria">
+        <h2>Atualize a categoria:</h2>
+    </div>
+    <div id="formAtualizarCategoria">
+        <form action="{% url 'atualizarCategoria2' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="idCategoria" id="idCategoria">
+            <label>Nome da categoria:</label>
+            <input type="text" name="nomeCategoria" id="nomeCategoria">
+            <button type="submit">Atualizar</button>
+        </form>
+    </div>
+</div>
+
+
+<div id="tituloCategorias">
+    <h2>Lista de categorias:</h2>
+</div>
+<div id="categorias">
+    {% for c in categorias %}
+    <div class="categoriaUnitaria">
+        <p>{{c.nome}}</p>
+        <div class="bp">
+            <div id="bp1">
+                <button class="jsCategoriaAtualizar" data-id="{{c.id}}" data-nome="{{c.nome}}">Atualizar</button>
+            </div>
+            <div id="bp2">
+                <form action="{% url 'removerCategoria' c.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Remover</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+    {% endfor %}
+</div>
+
 <hr>
 {% endblock %}

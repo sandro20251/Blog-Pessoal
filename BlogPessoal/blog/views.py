@@ -253,3 +253,19 @@ def atualizarPostagemPost(request):
         idCategoria = postagem.categoria.id
         postagem.save()
         return HttpResponseRedirect(reverse('postCategoria', args=[idCategoria]))
+
+
+def removerCategoria(request, id):
+    if request.method == "POST":
+        categoria = Categoria.objects.get(pk=id)
+        categoria.delete()
+        return HttpResponseRedirect(reverse('categoria'))
+
+def atualizarCategoria(request):
+    if request.method == "POST":
+        id = request.POST['idCategoria']
+        categoria = Categoria.objects.get(pk=id)
+        nome = request.POST['nomeCategoria']
+        categoria.nome = nome
+        categoria.save()
+        return HttpResponseRedirect(reverse('categoria'))

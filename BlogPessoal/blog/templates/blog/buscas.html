@@ -1,8 +1,19 @@
 {% extends 'blog/layout.html' %}
 
 {% block body %}
-{% for b in buscas %}
-<a href="{% url 'postagemView' b.id %}">{{b.titulo}}</a>
 
-{% endfor %}
+<div id="buscasPai">
+    <div id="buscasTitulo">
+        <h2>Títulos Achados:</h2>
+    </div>
+    <div id="buscasBuscas">
+        {% for b in buscas %}
+        <a href="{% url 'postagemView' b.id %}">{{b.titulo}}</a>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
 {% endblock %}
